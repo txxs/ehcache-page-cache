@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns="http://java.sun.com/xml/ns/javaee" 
+    xmlns:web="http://java.sun.com/xml/ns/javaee" 
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" 
+    id="WebApp_ID" version="2.5">
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/config/application-context.xml</param-value>
+  </context-param>
+  <servlet>
+    <servlet-name>spring-web</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>spring-web</servlet-name>
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+  <filter>
+    <filter-name>PageCachingFilter</filter-name>
+    <filter-class>net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter</filter-class>
+    <init-param>
+      <param-name>cacheName</param-name>
+      <param-value>testCache</param-value>
+    </init-param>
+  </filter>
+
+
+	<filter-mapping>
+    	<filter-name>PageCachingFilter</filter-name>
+    	<!--配置需要缓存的页面-->
+    	<url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+  <filter>
+    <filter-name>PageFragmentCachingFilter</filter-name>
+    <filter-class>net.sf.ehcache.constructs.web.filter.SimplePageFragmentCachingFilter</filter-class>
+    <init-param>
+      <param-name>cacheName</param-name>
+      <param-value>FragmentCache</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>PageFragmentCachingFilter</filter-name>
+    <url-pattern>/WEB-INF/views/jsp/childPage.jsp</url-pattern>
+     <dispatcher>INCLUDE</dispatcher>
+  </filter-mapping>
+</web-app>

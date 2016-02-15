@@ -1,0 +1,43 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="../../main/config/ehcache.xsd">
+    <cache name="PageCacheFilter"
+           maxEntriesLocalHeap="10000"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="500"
+           memoryStoreEvictionPolicy="LFU"
+            />
+    
+    	<!-- 页面全部缓存 name默认必须是SimplePageCachingFilter-->
+    	<cache name="SimplePageCachingFilter"
+       	 	eternal="false"
+        	maxElementsInMemory="100"
+        	overflowToDisk="false"
+        	diskPersistent="false"
+        	timeToIdleSeconds="0"
+        	timeToLiveSeconds="300"
+        	memoryStoreEvictionPolicy="LRU" />
+    	<!--整个页面缓存-->
+    	<cache name="testCache"
+        	eternal="false"
+        	maxElementsInMemory="100"
+        	overflowToDisk="false"
+        	diskPersistent="false"
+        	timeToIdleSeconds="0"
+        	timeToLiveSeconds="300"
+        	memoryStoreEvictionPolicy="LRU" />
+    	
+    	<!--部分页面缓存-->
+    	<cache name="FragmentCache"
+        	eternal="false"
+        	maxElementsInMemory="100"
+        	overflowToDisk="false"
+        	diskPersistent="false"
+        	timeToIdleSeconds="0"
+        	timeToLiveSeconds="300"
+        	memoryStoreEvictionPolicy="LRU" />
+    
+    
+</ehcache>
